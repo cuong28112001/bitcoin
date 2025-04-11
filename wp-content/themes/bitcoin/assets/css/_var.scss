@@ -1,0 +1,272 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/font-web/Roboto-Bold.woff2') format('woff2'),
+      url('../fonts/font-web/Roboto-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/font-web/Roboto-Regular.woff2') format('woff2'),
+      url('../fonts/font-web/Roboto-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'San Francisco Display';
+  src: url('../fonts/font-web/SanFranciscoDisplay-Medium.woff2') format('woff2'),
+      url('../fonts/font-web/SanFranciscoDisplay-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'San Francisco Display';
+  src: url('../fonts/font-web/SanFranciscoDisplay-Bold.woff2') format('woff2'),
+      url('../fonts/font-web/SanFranciscoDisplay-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+$font-body: 'Roboto', sans-serif;
+$font-title: 'San Francisco Display', sans-serif;
+
+$cl-yellow: #FFB200;
+$cl-santas: #9998AC;
+$cl-grey: #757575;
+$cl-gray: #858585;
+$cl-tuna: #3B3C40;
+$cl-mid: #63616E;
+$cl-black: #000000;
+$cl-blackmain: #222222;
+$cl-white: #FFFFFF;
+$cl-waterloo: #848393;
+$cl-athens: #F0F2F7;
+$cl-green: #51AF97;
+$cl-red: #F05243;
+$cl-up: #169D24;
+.ff-title{
+  font-family: $font-title;
+  font-weight: bold;
+}
+
+.fs-32{
+  font-size: 32px;
+  line-height: 125%;
+}
+.fs-30{
+  font-size: 30px;
+  line-height: 120%;
+}
+.fs-28{
+  font-size: 28px;
+  line-height: 130%;
+}
+.fs-24{
+  font-size: 24px;
+  line-height: 100%;
+}
+.fs-20{
+  font-size: 20px;
+  line-height: 100%;
+}
+.fs-18{
+  font-size: 18px;
+  line-height: 145%;
+}
+.fs-16{
+  font-size: 16px;
+}
+.fs-15{
+  font-size: 15px;
+}
+.fs-14{
+  font-size: 14px;
+  line-height: 130%;
+}
+.fs-13{
+  font-size: 13px;
+  line-height: 140%;
+}
+.fs-12{
+  font-size: 12px;
+}
+.fs-11{
+  font-size: 11px;
+}
+.fs-10{
+  font-size: 10px;
+}
+.fs-9{
+  font-size: 9px;
+}
+.fs-8{
+  font-size: 8px;
+}
+.cl-grey{
+  color: $cl-grey;
+}
+.cl-gray{
+  color: $cl-gray;
+}
+.cl-black{
+  color: $cl-black;
+}
+.cl-green{
+  color: $cl-green;
+}
+.cl-down,
+.cl-red{
+  color: $cl-red;
+}
+.cl-up{
+  color: $cl-up;
+}
+.row{
+  &:not([class^="gx-"]):not([class*=" gx-"]){
+    --bs-gutter-x: 30px;
+    @media (max-width: 991px) {
+      --bs-gutter-x: 20px;
+    }
+  }
+}
+.col-lg{
+  min-width: 0;
+}
+@media (min-width: 1400px) {
+  .col-xxl-2j {
+      flex: 0 0 auto;
+      width: 20%;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1920px) {
+ 
+}
+@media (min-width: 992px) and (max-width: 1399px) {
+  
+}
+@media (min-width: 768px) and (max-width: 991px){
+  .fs-32{
+    font-size: 26px;
+    line-height: 125%;
+  }
+  .fs-30{
+    font-size: 24px;
+    line-height: 120%;
+  }
+  .fs-28{
+    font-size: 20px;
+    line-height: 130%;
+  }
+  .fs-18{
+    font-size: 18px;
+    line-height: 145%;
+  }
+  .fs-16{
+    font-size: 16px;
+  }
+  .fs-15{
+    font-size: 15px;
+  }
+  .fs-14{
+    font-size: 14px;    
+  }
+  .fs-13{
+    font-size: 13px;
+    line-height: 140%;
+  }
+  .fs-12{
+    font-size: 12px;
+  }
+  .fs-11{
+    font-size: 11px;
+  }
+  .fs-10{
+    font-size: 10px;
+  }
+  .fs-9{
+    font-size: 9px;
+  }
+  .fs-8{
+    font-size: 8px;
+  }
+}
+@media (max-width: 767px) {
+  .fs-32{
+    font-size: 26px;
+    line-height: 125%;
+  }
+  .fs-30{
+    font-size: 24px;
+    line-height: 120%;
+  }
+  .fs-28{
+    font-size: 20px;
+    line-height: 130%;
+  }
+  .fs-18{
+    font-size: 18px;
+    line-height: 145%;
+  }
+  .fs-16{
+    font-size: 16px;
+  }
+  .fs-15{
+    font-size: 15px;
+  }
+  .fs-14{
+    font-size: 14px;    
+  }
+  .fs-13{
+    font-size: 13px;
+    line-height: 140%;
+  }
+  .fs-12{
+    font-size: 12px;
+  }
+  .fs-11{
+    font-size: 11px;
+  }
+  .fs-10{
+    font-size: 10px;
+  }
+  .fs-9{
+    font-size: 9px;
+  }
+  .fs-8{
+    font-size: 8px;
+  }
+}
+@mixin transform($property){
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -ms-transform: $property;
+  -o-transform: $property;
+  transform: $property;
+}
+@mixin transition($property){
+  -webkit-transition: $property;
+  -moz-transition: $property;
+  -ms-transition: $property;
+  -o-transition: $property;
+  transition: $property;
+}
+@mixin borderRadius($property){
+  border-radius: $property;
+  -webkit-border-radius: $property;
+  -moz-border-radius: $property;
+  -ms-border-radius: $property;
+  -o-border-radius: $property;
+}
