@@ -378,3 +378,21 @@ function custom_excerpt_length($length)
 } 
 add_filter('excerpt_length', 'custom_excerpt_length', 999);
 
+
+function is_valid_password($password) {
+    if (strlen($password) < 8) {
+        return "Mật khẩu phải có ít nhất 8 ký tự.";
+    }
+
+    $lowercase = preg_match('/[a-z]/', $password);
+    $uppercase = preg_match('/[A-Z]/', $password);
+    $number = preg_match('/[0-9]/', $password);
+    $special = preg_match('/[!@#$%^&*]/', $password);
+
+    $strength = $lowercase + $uppercase + $number + $special;
+    if ($strength < 3) {
+        return "Mật khẩu phải chứa ít nhất 3 trong số các loại ký tự sau: chữ thường, chữ in hoa, số hoặc ký tự đặc biệt.";
+    }
+
+    return true;
+}

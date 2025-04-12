@@ -91,12 +91,28 @@
                 </ul>
             </li>
         </ul>
-        <div class="user_menu">
-            <ul>
-                <li><a href="login.html" class="login_btn">Đăng nhập</a></li>
-                <li><a href="register.html" class="register_btn">Đăng ký</a></li>
-            </ul>
-        </div>
+        
+        <?php if (is_user_logged_in()): ?>
+            <div class="menu_profile">
+                <ul>
+                    <li class="menu-item-has-children">
+                        <a href="">Tài khoản của bạn <span><?php echo esc_html(wp_get_current_user()->display_name); ?></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="<?php echo esc_url(home_url('/change-password/')); ?>">Đổi mật khẩu</a></li>
+                            <li><a href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Đăng xuất</a></li>
+                            <li><a href="<?php //echo esc_url(home_url('/delete-account/')); ?>">Xoá tài khoản</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        <?php else: ?>
+            <div class="user_menu">
+                <ul>
+                    <li><a href="<?php echo esc_url(home_url('/login/')); ?>" class="login_btn">Đăng nhập</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/register/')); ?>" class="register_btn">Đăng ký</a></li>
+                </ul>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="search_table">
         <div class="close_search"><img src="<?php echo get_template_directory_uri() ?>/assets/images/close2.png" class="img-fluid" alt=""></div>
@@ -223,12 +239,27 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="user_menu">
-                    <ul>
-                        <li><a href="login.html" class="login_btn">Đăng nhập</a></li>
-                        <li><a href="register.html" class="register_btn">Đăng ký</a></li>
-                    </ul>
-                </div>
+                <?php if (is_user_logged_in()): ?>
+                    <div class="menu_profile">
+                        <ul>
+                            <li class="menu-item-has-children">
+                                <a href="">Tài khoản của bạn <span><?php echo esc_html(wp_get_current_user()->display_name); ?></span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="<?php echo esc_url(home_url('/change-password/')); ?>">Đổi mật khẩu</a></li>
+                                    <li><a href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Đăng xuất</a></li>
+                                    <li><a href="<?php //echo esc_url(home_url('/delete-account/')); ?>">Xoá tài khoản</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <div class="user_menu">
+                        <ul>
+                            <li><a href="<?php echo esc_url(home_url('/login/')); ?>" class="login_btn">Đăng nhập</a></li>
+                            <li><a href="<?php echo esc_url(home_url('/register/')); ?>" class="register_btn">Đăng ký</a></li>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="group_bottom">
                 <ul class="social">
