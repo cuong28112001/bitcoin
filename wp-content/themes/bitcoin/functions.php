@@ -265,7 +265,6 @@ function events_post_type()
 add_action('init', 'events_post_type');
 
 function create_event_cat_taxonomy() {
-    // Labels for the custom taxonomy
     $labels = array(
         'name'              => ('Event Categories'),
         'singular_name'     => ('Event Category'),
@@ -282,7 +281,7 @@ function create_event_cat_taxonomy() {
 
     // Arguments for the custom taxonomy
     $args = array(
-        'hierarchical'      => true, // Set to true for categories, false for tags
+        'hierarchical'      => true,
         'labels'            => $labels,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -335,7 +334,6 @@ function create_gallery_post_type() {
 add_action('init', 'create_gallery_post_type');
 
 function create_gallery_cat_taxonomy() {
-    // Labels for the custom taxonomy
     $labels = array(
         'name'              => 'Gallery Categories',
         'singular_name'     => 'Gallery Category',
@@ -352,7 +350,7 @@ function create_gallery_cat_taxonomy() {
 
     // Arguments for the custom taxonomy
     $args = array(
-        'hierarchical'      => true, // Set to true for categories, false for tags
+        'hierarchical'      => true,
         'labels'            => $labels,
         'show_ui'           => true,
         'show_admin_column' => true,
@@ -396,3 +394,49 @@ function is_valid_password($password) {
 
     return true;
 }
+
+function custom_breadcrumb() {
+
+    $page_for_posts = get_option('page_for_posts');
+    if ($page_for_posts) {
+        echo '<li><a href="' . get_permalink($page_for_posts) . '">' . get_the_title($page_for_posts) . '</a></li>';
+    }
+
+    $categories = get_the_category();
+    if ($categories) {
+        foreach ($categories as $category) {
+            echo '<li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';
+            break;
+        }
+    }
+
+}
+function redirect_blog_page_template($template) {
+
+    if (is_home()) {
+        $blog_page_id = get_option('page_for_posts');
+        if ($blog_page_id) {
+            $new_template = locate_template(['page-templates/page-news.php']);
+            if ($new_template) {
+                return $new_template;
+            }
+        }
+    }
+    return $template;
+}
+add_filter('template_include', 'redirect_blog_page_template');
+
+function custom_breadcrumb_single() {
+    echo '<li><a href="' . home_url() . '">Trang chủ</a></li>';
+    custom_breadcrumb();
+    echo '<li>' . get_the_title() . '</li>';
+}
+
+function get_reading_time($post_id) {
+    $content = get_post_field('post_content', $post_id);
+    $word_count = str_word_count(strip_tags($content));
+    $reading_speed = 200; 
+    $minutes = ceil($word_count / $reading_speed);
+    return $minutes . ' phút đọc';
+}
+

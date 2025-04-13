@@ -1,4 +1,10 @@
-<?php get_header() ?>
+<?php get_header(); ?>
+<?php
+$current_post_id = get_the_ID();
+$categories = wp_get_post_categories($current_post_id);
+$current_author_id = get_the_author_meta('ID');
+$page_for_posts = get_option('page_for_posts');
+?>
 <div class="body_content news_page">
                 <div class="row">
                     <div class="col-lg-auto order-lg-2">
@@ -8,17 +14,12 @@
                         <div class="single_content">
                             <div class="jbreadcrumb fs-14">
                                 <ul>
-                                    <li><a href="index.html">Trang chủ</a></li>
-                                    <li><a href="news.html">Tạp chí</a></li>
-                                    <li><a href="news.html">Tin tức Bitcoin</a></li>
-                                    <li>4 đồng tiền điện tử này đã đánh bại Phố Wall trong năm 2024</li>
+                                    <?php custom_breadcrumb_single() ?>
                                 </ul>
                             </div>
-                            <h1 class="fs-32 ff-title cl-black mb-3">4 đồng tiền điện tử này đã đánh bại Phố Wall trong
-                                năm 2024</h1>
+                            <h1 class="fs-32 ff-title cl-black mb-3"><?php the_title() ?></h1>
                             <div class="fs-18 mb-4">
-                                <p>As the velocity metric nears a breakout on the descending trend line, XRP price could
-                                    start an upward movement.</p>
+                                <p><?php echo get_the_excerpt(); ?></p>
                             </div>
                             <div class="single_meta">
                                 <div class="row justify-content-between">
@@ -33,8 +34,12 @@
                                     </div>
                                     <div class="col-lg order-lg-1">
                                         <div class="post_update">
-                                            <div class="fs-14 cl-black">2 min read</div>
-                                            <div class="cl-grey fs-11">Updated: Jan. 2, 2025 at 10:13 am UTC</div>
+                                            <div class="fs-14 cl-black"><?php echo get_reading_time($current_post_id) ?></div>
+                                            <div class="cl-grey fs-11">
+                                                <?php
+                                                    echo 'Updated: ' . get_the_modified_time('M. j, Y') . ' at ' . get_the_modified_time('g:i a') . ' UTC';
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-auto order-lg-2">
@@ -187,186 +192,38 @@
                                         aria-labelledby="samecate-tab" tabindex="0">
                                         <div class="related_slider_wrapper">
                                             <div class="slider_samecate related_slider" data-arrow="arrows_1">
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
+                                                <?php
+                                                $args = [
+                                                    'post_type'      => 'post',
+                                                    'posts_per_page' => 12, // Số bài viết muốn hiển thị
+                                                    'category__in'   => $categories, // Lọc theo danh mục của bài viết hiện tại
+                                                    'post__not_in'   => [$current_post_id], // Loại bỏ bài viết hiện tại
+                                                ];
+
+                                                $query = new WP_Query($args);
+
+                                                if($query->have_posts()):
+                                                    $fl=0;
+                                                    while($query->have_posts()): 
+                                                        $query->the_post();
+                                                        $post__not_in[]=get_the_ID();
+                                                        $time = get_the_time('U');
+                                                        $fl++;
+                                                        ?>
+                                                        <div class="item">
+                                                            <figure>
+                                                                <a href="<?php the_permalink(); ?>"><img
+                                                                        src="<?php echo get_the_post_thumbnail_url()?>" class="img-fluid"
+                                                                        alt=""></a>
+                                                            </figure>
+                                                            <h3 class="fs-13 ff-title"><a href="<?php the_permalink(); ?>"><?php echo get_the_title()?></a></h3>
+                                                            <ul class="post_meta">
+                                                                <li><?php echo get_the_date('d/m/Y'); ?></li>
+                                                                <li><?php echo get_the_time('H:i'); ?></li>
+                                                            </ul>
+                                                        </div>
+                                                    <?php endwhile; ?>
+                                                <?php endif;wp_reset_postdata(); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -374,186 +231,40 @@
                                         aria-labelledby="sameauthor-tab" tabindex="0">
                                         <div class="related_slider_wrapper">
                                             <div class="slider_samecate related_slider" data-arrow="arrows_2">
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="item">
-                                                    <figure>
-                                                        <a href="news-detail.html"><img
-                                                                src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg" class="img-fluid"
-                                                                alt=""></a>
-                                                    </figure>
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt
-                                                            qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk–
-                                                            Liệu Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50%
-                                                            của Elon Musk– Liệu</a></h3>
-                                                    <ul class="post_meta">
-                                                        <li>29/12/2024</li>
-                                                        <li>08:30</li>
-                                                    </ul>
-                                                </div>
+                                                <?php
+                                                
+
+                                                $args = [
+                                                    'post_type'      => 'post',
+                                                    'posts_per_page' => 12, // Số bài viết muốn hiển thị
+                                                    'author'         => $current_author_id, // Lọc bài viết theo tác giả hiện tại
+                                                    'post__not_in'   => [$current_post_id], // Loại bỏ bài viết hiện tại
+                                                ];
+
+                                                $query = new WP_Query($args);
+
+                                                if($query->have_posts()):
+                                                    $fl=0;
+                                                    while($query->have_posts()): 
+                                                        $query->the_post();
+                                                        $post__not_in[]=get_the_ID();
+                                                        $time = get_the_time('U');
+                                                        $fl++;
+                                                        ?>
+                                                        <div class="item">
+                                                            <figure>
+                                                                <a href="<?php the_permalink(); ?>"><img
+                                                                        src="<?php echo get_the_post_thumbnail_url()?>" class="img-fluid"
+                                                                        alt=""></a>
+                                                            </figure>
+                                                            <h3 class="fs-13 ff-title"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h3>
+                                                            <ul class="post_meta">
+                                                                <li><?php echo get_the_date('d/m/Y'); ?></li>
+                                                                <li><?php echo get_the_time('H:i'); ?></li>
+                                                            </ul>
+                                                        </div>
+                                                    <?php endwhile; ?>
+                                                <?php endif;wp_reset_postdata(); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -571,299 +282,51 @@
                                     <span>Mới cập nhật</span>
                                 </div>
                                 <div class="list_post">
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
+                                    <?php
+                                    $query_args = array( 
+                                        'post_type'      => 'post',
+                                        'posts_per_page'  => '10',
+                                        'post__not_in'   => [$current_post_id],
+                                       
+                                     );
+                                    $related_cats_post = new WP_Query( $query_args );
+                                    if($related_cats_post->have_posts()):
+                                        $fl=0;
+                                        while($related_cats_post->have_posts()): 
+                                            $related_cats_post->the_post();
+                                            $post__not_in[]=get_the_ID();
+                                            $time = get_the_time('U');
+                                            $fl++;
+                                            ?>
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-lg col-md col-7 order-md-0">
+                                                        <h3 class="fs-18 ff-title"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h3>
+                                                        <ul class="post_meta">
+                                                            <?php custom_breadcrumb() ?>
+                                                            <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-5 order-md-2">
+                                                        <figure>
+                                                            <a href="<?php the_permalink(); ?>">
+                                                                <img src="<?php echo get_the_post_thumbnail_url()?>" class="img-fluid"
+                                                                    alt="">
+                                                            </a>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="col-lg col-md order-md-1">
+                                                        <div class="post_excerpt">
+                                                            <p><?php echo get_the_excerpt() ?></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg col-md col-7 order-md-0">
-                                                <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua
-                                                        điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu
-                                                        Bitcoin vượt qua điều kiện sử dụng năng lượng sạch 50% của Elon
-                                                        Musk– Liệu</a></h3>
-                                                <ul class="post_meta">
-                                                    <li><a href="">Tạp chí</a></li>
-                                                    <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                    <li>1 giờ trước</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg col-md order-md-1">
-                                                <div class="post_excerpt">
-                                                    <p>As the velocity metric nears a breakout on the descending trend
-                                                        line, XRP price could start an upward...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <?php endwhile; ?>
+                                    <?php endif;wp_reset_postdata(); ?>
                                 </div>
                                 <div class="text-center load_post">
-                                    <a href="news.html" class="btn btn-large">Read more news</a>
+                                    <a href="<?php echo get_permalink($page_for_posts) ?>" class="btn btn-large">Xem thêm bài viết</a>
                                 </div>
                             </div>
                         </div>
