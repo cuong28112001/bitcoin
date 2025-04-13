@@ -4,7 +4,8 @@
     */
     get_header()
 ?>
-<?php $section_banner=get_field('section_banner') ?>
+<?php //$section_banner=get_field('section_banner') ?>
+<?php $page_for_posts = get_option('page_for_posts'); ?>
 <div class="splide coin_news">
                 <div class="splide__track">
                     <ul class="splide__list">
@@ -318,336 +319,143 @@
             </div>
             <div class="body_content">
                 <div class="row">
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="featured_tag jtag line_bottom fs-12 fw-bold">
-                            <span>Tin nổi bật</span>
-                        </div>
-                        <div class="featured_post">
-                            <div class="item">
-                                <div class="text_box">
-                                    <h3 class="fs-28 ff-title"><a href="news-detail.html">4 đồng tiền điện tử này đã
-                                            đánh bại Phố Wall trong năm 2024</a></h3>
-                                    <div class="post_excerpt fs-15">
-                                        <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                            price could start an upward movement.</p>
-                                    </div>
-                                    <ul class="post_meta">
-                                        <li><a href="">Tạp chí</a></li>
-                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                        <li>1 giờ trước</li>
-                                    </ul>
-                                </div>
-                                <figure>
-                                    <a href="news-detail.html">
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                    </a>
-                                </figure>
+                    <?php
+                    $query_args = array( 
+                        'post_type'      => 'post',
+                        'posts_per_page'  => '9',
+                       
+                     );
+                    $post__not_in=[];
+                    $related_cats_post = new WP_Query( $query_args );
+                    if($related_cats_post->have_posts()):
+                        $fl=0;
+                        ?>
+                        <div class="col-lg-6 order-lg-1">
+                            <div class="featured_tag jtag line_bottom fs-12 fw-bold">
+                                <span>Tin nổi bật</span>
                             </div>
+                            <?php while($related_cats_post->have_posts()): 
+                                $related_cats_post->the_post();
+                                $post__not_in[]=get_the_ID();
+                                $time = get_the_time('U');
+                                ?>
+                                <div class="featured_post">
+                                    <div class="item">
+                                        <div class="text_box">
+                                            <h3 class="fs-28 ff-title"><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h3>
+                                            <div class="post_excerpt fs-15">
+                                                <p><?php echo get_the_excerpt() ?></p>
+                                            </div>
+                                            <ul class="post_meta">
+                                                <?php custom_breadcrumb() ?>
+                                                <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                            </ul>
+                                        </div>
+                                        <figure>
+                                            <a href="<?php the_permalink(); ?>">
+                                                <img src="<?php echo get_the_post_thumbnail_url()?>" class="img-fluid" alt="">
+                                            </a>
+                                        </figure>
+                                    </div>
+                                </div>
+                            <?php break;endwhile; ?>
                         </div>
-                    </div>
-                    <div class="col-lg-3 order-lg-2">
-                        <div class="featured_second">
-                            <div class="row">
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="featured_second">
+                                <div class="row">
+                                    <?php $fl=0;while($related_cats_post->have_posts()): 
+                                        $related_cats_post->the_post();
+                                        $post__not_in[]=get_the_ID();
+                                        $time = get_the_time('U');
+                                        $fl++;
+                                        ?>
+                                        <div class="col-md-12 col-6">
+                                            <div class="item">
+                                                <div class="row gx-lg-2">
+                                                    <div class="col-lg-4 col-md-5">
+                                                        <figure>
+                                                            <a href="<?php the_permalink(); ?>">
+                                                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
+                                                                    alt="">
+                                                            </a>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-7">
+                                                        <div class="text_box">
+                                                            <h3 class="fs-13 ff-title"><a href="<?php the_permalink(); ?>"><?php echo get_the_excerpt() ?></a></h3>
+                                                            <ul class="post_meta d-lg-none">
+                                                                <?php custom_breadcrumb() ?>
+                                                                <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul class="post_meta d-none d-lg-flex">
+                                                    <?php custom_breadcrumb() ?>
+                                                    <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                                </ul>
+                                                <div class="post_excerpt fs-12">
+                                                    <p><?php echo get_the_excerpt() ?></p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
+                                    <?php if($fl==4) break;endwhile; ?>
+                                    
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 order-lg-0">
-                        <div class="date_tag jtag line_bottom fs-12 fw-bold">
-                            <span>Chủ Nhật, 29 tháng 12 năm 2024</span>
-                        </div>
-                        <div class="featured_second">
-                            <div class="row">
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
+                        <div class="col-lg-3 order-lg-0">
+                            <div class="date_tag jtag line_bottom fs-12 fw-bold">
+                                <span>
+                                    <?php
+                                    $formatter = new IntlDateFormatter('vi_VN', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+                                    echo $formatter->format(time());
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="featured_second">
+                                <div class="row">
+                                    <?php while($related_cats_post->have_posts()): 
+                                        $related_cats_post->the_post();
+                                        $post__not_in[]=get_the_ID();
+                                        $time = get_the_time('U');
+                                        $fl++;
+                                        ?>
+                                        <div class="col-md-12 col-6">
+                                            <div class="item">
+                                                <div class="row gx-lg-2">
+                                                    <div class="col-lg-4 col-md-5">
+                                                        <figure>
+                                                            <a href="<?php the_permalink(); ?>">
+                                                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
+                                                                    alt="">
+                                                            </a>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-7">
+                                                        <div class="text_box">
+                                                            <h3 class="fs-13 ff-title"><a href="<?php the_permalink(); ?>"><?php echo get_the_excerpt() ?></a></h3>
+                                                            <ul class="post_meta d-lg-none">
+                                                                <?php custom_breadcrumb() ?>
+                                                    <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul class="post_meta d-none d-lg-flex">
+                                                    <?php custom_breadcrumb() ?>
+                                                    <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                                </ul>
+                                                <div class="post_excerpt fs-12">
+                                                    <p><?php echo get_the_excerpt() ?></p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-6">
-                                    <div class="item">
-                                        <div class="row gx-lg-2">
-                                            <div class="col-lg-4 col-md-5">
-                                                <figure>
-                                                    <a href="news-detail.html">
-                                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </a>
-                                                </figure>
-                                            </div>
-                                            <div class="col-lg-8 col-md-7">
-                                                <div class="text_box">
-                                                    <h3 class="fs-13 ff-title"><a href="news-detail.html">The Metaverse
-                                                            We’ve All Been Waiting For: Wilder World Unveils
-                                                            Revolutionary The Metaverse We’ve All Been Waiting For:
-                                                            Wilder World Unveils Revolutionary</a></h3>
-                                                    <ul class="post_meta d-lg-none">
-                                                        <li><a href="">Tạp chí</a></li>
-                                                        <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                        <li>1 giờ trước</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="post_meta d-none d-lg-flex">
-                                            <li><a href="">Tạp chí</a></li>
-                                            <li><a href="">tin tức bitcoin (btc)</a></li>
-                                            <li>1 giờ trước</li>
-                                        </ul>
-                                        <div class="post_excerpt fs-12">
-                                            <p>As the velocity metric nears a breakout on the descending trend line, XRP
-                                                price could start an upward movement.</p>
-                                        </div>
-                                    </div>
+                                    <?php endwhile; ?>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif;wp_reset_postdata(); ?>
                 </div>
                 <hr class="breakline">
                 <div class="row">
@@ -737,85 +545,42 @@
                                 <span>Press Releases</span>
                             </div>
                             <div class="row">
-                                <div class="col-lg col-md col-6">
-                                    <div class="item">
-                                        <figure>
-                                            <a href="news-detail.html"><img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg"
-                                                    class="img-fluid" alt=""></a>
-                                        </figure>
-                                        <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều kiện
-                                                sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt qua điều
-                                                kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a></h3>
-                                        <ul class="post_meta">
-                                            <li>29/12/2024</li>
-                                            <li>08:30</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg col-md col-6">
-                                    <div class="item">
-                                        <figure>
-                                            <a href="news-detail.html"><img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg"
-                                                    class="img-fluid" alt=""></a>
-                                        </figure>
-                                        <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều kiện
-                                                sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt qua điều
-                                                kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu </a></h3>
-                                        <ul class="post_meta">
-                                            <li>29/12/2024</li>
-                                            <li>08:30</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg col-md col-6">
-                                    <div class="item">
-                                        <figure>
-                                            <a href="news-detail.html"><img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg"
-                                                    class="img-fluid" alt=""></a>
-                                        </figure>
-                                        <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều kiện
-                                                sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt qua điều
-                                                kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu </a></h3>
-                                        <ul class="post_meta">
-                                            <li>29/12/2024</li>
-                                            <li>08:30</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg col-md col-6">
-                                    <div class="item">
-                                        <figure>
-                                            <a href="news-detail.html"><img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg"
-                                                    class="img-fluid" alt=""></a>
-                                        </figure>
-                                        <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều kiện
-                                                sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt qua điều
-                                                kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a></h3>
-                                        <ul class="post_meta">
-                                            <li>29/12/2024</li>
-                                            <li>08:30</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg col-md col-6 d-none d-md-block">
-                                    <div class="item">
-                                        <figure>
-                                            <a href="news-detail.html"><img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb2.jpg"
-                                                    class="img-fluid" alt=""></a>
-                                        </figure>
-                                        <h3 class="fs-13 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều kiện
-                                                sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt qua điều
-                                                kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a></h3>
-                                        <ul class="post_meta">
-                                            <li>29/12/2024</li>
-                                            <li>08:30</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <?php
+                                $query_args = array( 
+                                    'post_type'      => 'post',
+                                    'posts_per_page'  => '5',
+                                    'post__not_in'  => $post__not_in,
+                                   
+                                 );
+                                $related_cats_post = new WP_Query( $query_args );
+                                if($related_cats_post->have_posts()):
+                                    $fl=0;
+                                    while($related_cats_post->have_posts()): 
+                                        $related_cats_post->the_post();
+                                        $post__not_in[]=get_the_ID();
+                                        $time = get_the_time('U');
+                                        $fl++;
+                                        ?>
+                                        <div class="col-lg col-md col-6 <?php if($fl==5) echo "d-none d-md-block";?>">
+                                            <div class="item">
+                                                <figure>
+                                                    <a href="<?php the_permalink(); ?>"><img src="<?php echo get_the_post_thumbnail_url()?>"
+                                                            class="img-fluid" alt=""></a>
+                                                </figure>
+                                                <h3 class="fs-13 ff-title"><a href="<?php the_permalink(); ?>"><?php echo get_the_title() ?></a></h3>
+                                                <ul class="post_meta">
+                                                    <li><?php echo get_the_date('d/m/Y'); ?></li>
+                                                    <li><?php echo get_the_time('H:i'); ?></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    <?php endwhile; ?>
+                                <?php endif;wp_reset_postdata(); ?>
                                 <!-- Query 5 bài. Bài cuối thêm class d-none.d-md-block -->
                             </div>
+                            
                             <div class="text-center">
-                                <a href="news.html" class="btn btn-rounded">Xem thêm bài viết</a>
+                                <a href="<?php echo get_permalink($page_for_posts) ?>" class="btn btn-rounded">Xem thêm bài viết</a>
                             </div>
                         </div>
                         <hr class="breakline">
@@ -824,429 +589,51 @@
                                 <span>Bài viết mới nhất</span>
                             </div>
                             <div class="list_post">
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
+                                <?php
+                                $query_args = array( 
+                                    'post_type'      => 'post',
+                                    'posts_per_page'  => '15',
+                                    // 'post__not_in'  => $post__not_in,
+                                   
+                                 );
+                                $related_cats_post = new WP_Query( $query_args );
+                                if($related_cats_post->have_posts()):
+                                    $fl=0;
+                                    while($related_cats_post->have_posts()): 
+                                        $related_cats_post->the_post();
+                                        $post__not_in[]=get_the_ID();
+                                        $time = get_the_time('U');
+                                        $fl++;
+                                        ?>
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-lg col-md col-7 order-md-0">
+                                                    <h3 class="fs-18 ff-title"><a href="<?php the_permalink(); ?>"><?php echo get_the_title() ?></a>
+                                                    </h3>
+                                                    <ul class="post_meta">
+                                                        <?php custom_breadcrumb() ?>
+                                                        <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-5 order-md-2">
+                                                    <figure>
+                                                        <a href="<?php the_permalink(); ?>">
+                                                            <img src="<?php echo get_the_post_thumbnail_url()?>" class="img-fluid" alt="">
+                                                        </a>
+                                                    </figure>
+                                                </div>
+                                                <div class="col-lg col-md order-md-1">
+                                                    <div class="post_excerpt">
+                                                        <p><?php echo get_the_excerpt() ?></p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-lg col-md col-7 order-md-0">
-                                            <h3 class="fs-18 ff-title"><a href="news-detail.html">Bitcoin vượt qua điều
-                                                    kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu Bitcoin vượt
-                                                    qua điều kiện sử dụng năng lượng sạch 50% của Elon Musk– Liệu</a>
-                                            </h3>
-                                            <ul class="post_meta">
-                                                <li><a href="">Tạp chí</a></li>
-                                                <li><a href="">tin tức bitcoin (btc)</a></li>
-                                                <li>1 giờ trước</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-5 order-md-2">
-                                            <figure>
-                                                <a href="news-detail.html">
-                                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/post-thumb.jpg" class="img-fluid" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-lg col-md order-md-1">
-                                            <div class="post_excerpt">
-                                                <p>As the velocity metric nears a breakout on the descending trend line,
-                                                    XRP price could start an upward...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php endwhile; ?>
+                                <?php endif;wp_reset_postdata(); ?>
                             </div>
                             <div class="text-center load_post">
-                                <a href="news.html" class="btn btn-large">Read more news</a>
+                                <a href="<?php echo get_permalink($page_for_posts) ?>" class="btn btn-large">Xem thêm bài viết</a>
                             </div>
                         </div>
                     </div>
