@@ -469,7 +469,8 @@ body .btn.btn-seemore:hover {
 #menu_mobile .menu_site li:not(:last-child) > a {
   border-bottom: 1px solid #EFEFEF;
 }
-#menu_mobile .menu_site li.current-menu-item > a {
+#menu_mobile .menu_site li.current-menu-item > a,
+#menu_mobile .menu_site li.current-menu-parent > a {
   color: #FFB200;
   font-weight: bold;
 }
@@ -887,10 +888,12 @@ body .btn.btn-seemore:hover {
 .body_wrapper #header_site .menu_site li .sub-menu li:hover > a {
   background: #F1F0E8;
 }
-.body_wrapper #header_site .menu_site li.current-menu-item > a {
+.body_wrapper #header_site .menu_site li.current-menu-item > a,
+.body_wrapper #header_site .menu_site li.current-menu-parent > a {
   background: #F1F0E8;
 }
-.body_wrapper #header_site .menu_site li.current-menu-item > a::before {
+.body_wrapper #header_site .menu_site li.current-menu-item > a::before,
+.body_wrapper #header_site .menu_site li.current-menu-parent > a::before {
   opacity: 1;
   visibility: visible;
 }
@@ -4413,3 +4416,10 @@ body .btn.btn-seemore:hover {
   background: #29293B;
   color: #FFFFFF;
 }/*# sourceMappingURL=main.css.map */
+
+.body_content .post_content .comment-respond {
+  display: none;
+}
+.body_content .post_content .comment_post .reply {
+  display: none;
+}

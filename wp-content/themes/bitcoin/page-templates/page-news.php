@@ -143,7 +143,7 @@ get_header();
                                         </h3>
                                         <ul class="post_meta">
                                             <?php custom_breadcrumb() ?>
-                                                        <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
+                                            <li><?php echo human_time_diff($time, current_time('timestamp')) . ' trước'; ?></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-5 order-md-2">

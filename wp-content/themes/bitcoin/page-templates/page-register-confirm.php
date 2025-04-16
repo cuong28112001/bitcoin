@@ -19,13 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $headers = array('Content-Type: text/html; charset=UTF-8');
 
         if (wp_mail($email, $subject, $message, $headers)) {
-            // $error= '<p class="success-message">Mã xác thực đã được gửi đến email của bạn.</p>';
+            $error= '<p class="success-message">Mã xác thực đã được gửi đến email của bạn.</p>';
         } else {
-            $error '<p class="error-message">Không thể gửi email, vui lòng thử lại.</p>';
+            $error= '<p class="error-message">Không thể gửi email, vui lòng thử lại.</p>';
         }
-    
-    
-        
         $verification_code=md5($verification_code.'2025');
         $_SESSION['verification_code'] = $verification_code;
         $verification_email=md5($email.'2025');

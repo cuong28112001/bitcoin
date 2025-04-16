@@ -1,11 +1,15 @@
 <?php
+/*
+    Template Name: Thank you
+*/
 get_header();
 ?>
+
 <div class="seach_page">
     <div class="head_search">
-        <h1 class="fs-48 ff-title cl-black mb-3">404 - Không tìm thấy trang</h1>
+        <h1 class="fs-48 ff-title cl-black mb-3"><?php the_title() ?></h1>
         <div class="fs-24 cl-black mb-3">
-            Xin lỗi, nhưng trang mà bạn đang tìm kiếm không tồn tại.
+            <?php the_content() ?>
         </div>
         <div class="fs-14">
             Quay lại <a href="<?php echo home_url() ?>" class="fs-12 fw-bold btn btn-seemore">Trang chủ</a>
@@ -58,5 +62,7 @@ get_header();
         </div>
     </div>
 </div>
+
+
 <?php
 get_footer();
