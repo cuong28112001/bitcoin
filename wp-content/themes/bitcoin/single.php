@@ -117,12 +117,26 @@ $page_for_posts = get_option('page_for_posts');
                                     <div class="fs-24 fw-bold cl-black mb-3">
                                         Bình luận
                                     </div>
-                                    <form action="">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="Chia sẻ ý kiến của bạn">
-                                            <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-angle-right"></i></button>
+
+                                    <?php if (comments_open() || get_comments_number()) : ?>
+                                        <div class="comment-list">
+                                            <?php comments_template(); ?>
                                         </div>
-                                    </form>
+                                    <?php endif; ?>
+
+                                    <?php if (is_user_logged_in()) : ?>
+                                        <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post">
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="comment" class="form-control" placeholder="Chia sẻ ý kiến của bạn" required>
+                                                <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-angle-right"></i></button>
+                                            </div>
+
+                                            <?php comment_id_fields(); ?>
+                                            <?php do_action('comment_form', get_the_ID()); ?>
+                                        </form>
+                                    <?php else : ?>
+                                        <p>Bạn cần <a href="<?php echo home_url('/login/'); ?>">đăng nhập</a> để bình luận.</p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="near_post">

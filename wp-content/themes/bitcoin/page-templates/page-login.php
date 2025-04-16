@@ -75,7 +75,7 @@ get_header();
             <div class="mb-2">
                 <input type="submit" class="btn btn-yellow w-100" value="Đăng nhập">
             </div>
-            <div class="">Bạn chưa có tài khoản? <a href="register.html"><strong>Đăng ký</strong></a></div>
+            <div class="">Bạn chưa có tài khoản? <a href="register"><strong>Đăng ký</strong></a></div>
         </form>
     </div>
 </div>

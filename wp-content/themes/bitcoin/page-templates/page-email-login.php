@@ -59,7 +59,7 @@ get_header();
                 </div>
             </div>
             <div class="captcha mb-4">
-                <a href="forgot-password.html"><strong>Quên mật khẩu?</strong></a>
+                <a href="/forgot-password/"><strong>Quên mật khẩu?</strong></a>
             </div>
             <?php if (($error)): ?>
                 <div class="alert alert-danger">
@@ -69,7 +69,7 @@ get_header();
             <div class="mb-2">
                 <input type="submit" class="btn btn-yellow w-100" value="Tiếp tục">
             </div>
-            <div class="">Bạn chưa có tài khoản? <a href="register.html"><strong>Đăng ký</strong></a></div>
+            <div class="">Bạn chưa có tài khoản? <a href="/register/"><strong>Đăng ký</strong></a></div>
         </form>
     </div>
 </div>

@@ -179,6 +179,24 @@ add_action('wp_enqueue_scripts', 'replace_core_jquery_version');
  * Implement the Custom Header feature.
  */
 
+function add_menu_link_class($atts, $item, $args)
+{
+    if (property_exists($args, 'link_class')) {
+        $atts['class'] = $args->link_class;
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'add_menu_link_class', 1, 3);
+
+function add_additional_class_on_li($classes, $item, $args)
+{
+    if (isset($args->add_li_class)) {
+        $classes[] = $args->add_li_class;
+    }
+    return $classes;
+}
+add_filter('nav_menu_css_class', 'add_additional_class_on_li', 1, 3);
+
 
 add_filter( 'intermediate_image_sizes_advanced', 'prefix_remove_default_images' );
 // Remove default image sizes here.
@@ -213,12 +231,12 @@ if (function_exists('acf_add_options_page')) {
 }
 
 
-function events_post_type()
+function coins_post_type()
 {
 
     $label = array(
-        'name' => 'Event', //Tên post type dạng số nhiều
-        'singular_name' => 'Event' //Tên post type dạng số ít
+        'name' => 'Coin', //Tên post type dạng số nhiều
+        'singular_name' => 'Coin' //Tên post type dạng số ít
     );
 
 
@@ -227,7 +245,7 @@ function events_post_type()
      */
     $args = array(
         'labels' => $label, //Gọi các label trong biến $label ở trên
-        'description' => 'Post type event', //Mô tả của post type
+        'description' => 'Post type coin', //Mô tả của post type
         'supports' => array(
             'title',
             'editor',
@@ -240,7 +258,7 @@ function events_post_type()
             'sticky',
             // 'custom-fields'
         ), //Các tính năng được hỗ trợ trong post type
-        'taxonomies' => array( 'event_cat' ), //Các taxonomy được phép sử dụng để phân loại nội dung
+        'taxonomies' => array( 'coin_cat' ), //Các taxonomy được phép sử dụng để phân loại nội dung
         'hierarchical' => false, //Cho phép phân cấp, nếu là false thì post type này giống như Post, true thì giống như Page
         'public' => true, //Kích hoạt post type
         'show_ui' => true, //Hiển thị khung quản trị như Post/Page
@@ -257,26 +275,26 @@ function events_post_type()
     );
 
     
-    register_post_type('event', $args); //Tạo post type với slug tên là sanpham và các tham số trong biến $args ở trên
+    register_post_type('coin', $args); //Tạo post type với slug tên là sanpham và các tham số trong biến $args ở trên
 
 
 }
 /* Kích hoạt hàm tạo custom post type */
-add_action('init', 'events_post_type');
+add_action('init', 'coins_post_type');
 
-function create_event_cat_taxonomy() {
+function create_coin_cat_taxonomy() {
     $labels = array(
-        'name'              => ('Event Categories'),
-        'singular_name'     => ('Event Category'),
-        'search_items'      => ('Search Event Categories'),
-        'all_items'         => ('All Event Categories'),
-        'parent_item'       => ('Parent Event Category'),
-        'parent_item_colon' => ('Parent Event Category:'),
-        'edit_item'         => ('Edit Event Category'),
-        'update_item'       => ('Update Event Category'),
-        'add_new_item'      => ('Add New Event Category'),
-        'new_item_name'     => ('New Event Category Name'),
-        'menu_name'         => ('Event Categories'),
+        'name'              => ('Coin Categories'),
+        'singular_name'     => ('Coin Category'),
+        'search_items'      => ('Search Coin Categories'),
+        'all_items'         => ('All Coin Categories'),
+        'parent_item'       => ('Parent Coin Category'),
+        'parent_item_colon' => ('Parent Coin Category:'),
+        'edit_item'         => ('Edit Coin Category'),
+        'update_item'       => ('Update Coin Category'),
+        'add_new_item'      => ('Add New Coin Category'),
+        'new_item_name'     => ('New Coin Category Name'),
+        'menu_name'         => ('Coin Categories'),
     );
 
     // Arguments for the custom taxonomy
@@ -286,14 +304,14 @@ function create_event_cat_taxonomy() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array('slug' => 'event-category'),
+        'rewrite'           => array('slug' => 'coin-category'),
     );
 
     // Register the custom taxonomy
-    register_taxonomy('event_cat', array( 'event'), $args);
+    register_taxonomy('coin_cat', array( 'coin'), $args);
 }
 
-add_action('init', 'create_event_cat_taxonomy');
+add_action('init', 'create_coin_cat_taxonomy');
 
 
 function create_gallery_post_type() {
@@ -440,3 +458,17 @@ function get_reading_time($post_id) {
     return $minutes . ' phút đọc';
 }
 
+function remove_admin_bar_for_non_admins() {
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+}
+add_action('after_setup_theme', 'remove_admin_bar_for_non_admins');
+
+function restrict_admin_access() {
+    if (is_admin() && !current_user_can('edit_posts')) {
+        wp_redirect(home_url());
+        exit;
+    }
+}
+add_action('admin_init', 'restrict_admin_access');
