@@ -18,24 +18,24 @@ var App = {
       });
       splide.mount(window.splide.Extensions);
     }
-    if (jQuery('.trade_live').length) {
-      var tsplide = new Splide('.trade_live', {
-        type: 'loop',
-        perPage: 1,
-        autoWidth: true,
-        autoScroll: {
-          speed: 0.2,
-        },
-        arrows: false,
-        pagination: false,
-        breakpoints: {
-          991: {
-            perPage: 1,
-          },
-        }
-      });
-      tsplide.mount(window.splide.Extensions);
-    }
+    // if (jQuery('.trade_live').length) {
+    //   var tsplide = new Splide('.trade_live', {
+    //     type: 'loop',
+    //     perPage: 1,
+    //     autoWidth: true,
+    //     autoScroll: {
+    //       speed: 0.2,
+    //     },
+    //     arrows: false,
+    //     pagination: false,
+    //     breakpoints: {
+    //       991: {
+    //         perPage: 1,
+    //       },
+    //     }
+    //   });
+    //   tsplide.mount(window.splide.Extensions);
+    // }
     if (jQuery('.slider_samecate').length) {
       jQuery('#relateTab .nav-link').click(function () {
         $tab = jQuery(this).data('arrow');

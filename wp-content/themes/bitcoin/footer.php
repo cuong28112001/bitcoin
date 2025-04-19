@@ -86,9 +86,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <a href="#" data-bs-dismiss="modal" aria-label="Close" class="close_ads"><img src="<?php echo get_template_directory_uri() ?>/assets/images/close.png" alt=""></a>
-                    <a href="">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ads-304x250.jpg" alt="">
-                    </a>
+                    <?php echo get_field('ads_popup', 'option'); ?>
                 </div>
             </div>
         </div>

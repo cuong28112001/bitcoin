@@ -56,9 +56,7 @@ get_header();
     </div>
     <div class="ads_footer">
         <div class="ads_box">
-            <a href="">
-                <img src="<?php echo get_template_directory_uri() ?>/assets/images/ads-980x120.jpg" alt="">
-            </a>
+            <?php echo get_field('ads', 'option'); ?>
         </div>
     </div>
 </div>

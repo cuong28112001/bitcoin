@@ -3465,6 +3465,7 @@ body .btn.btn-seemore:hover {
   color: #9998AC;
 }
 .price_detail .token_section {
+  min-height: 520px;
   padding: 0 30px;
 }
 .price_detail .token_section .inner_content {

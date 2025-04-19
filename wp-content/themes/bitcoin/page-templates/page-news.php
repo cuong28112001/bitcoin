@@ -18,16 +18,14 @@ get_header();
             </ul>
         </div>
     </div>
-    <div class="fs-16">
+    <!-- <div class="fs-16">
         Delving into captivating crypto narratives, revealing breakthroughs in decentralization, and
         offering astute evaluations within the digital assets landscape.
-    </div>
+    </div> -->
 </div>
 <div class="ads_top">
     <div class="ads_box">
-        <a href="">
-            <img src="<?php echo get_template_directory_uri() ?>/assets/images/ads-720x90.png" alt="">
-        </a>
+        <?php echo get_field('ads_top', 'option'); ?>
     </div>
 </div>
 <div class="body_content news_page">
@@ -38,76 +36,12 @@ get_header();
                     <div class="col-lg-12 col-md-6">
                         <div class="sidebar_ads">
                             <div class="ads_box">
-                                <a href="">
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/ads-304x250.jpg" alt="">
-                                </a>
+                                <?php echo get_field('ads_sidebar', 'option'); ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-6">
-                        <div class="sidebar_chart">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#home-tab-pane" type="button" role="tab"
-                                        aria-controls="home-tab-pane" aria-selected="true">BTC</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                        aria-controls="profile-tab-pane" aria-selected="false">ETH</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                        data-bs-target="#contact-tab-pane" type="button" role="tab"
-                                        aria-controls="contact-tab-pane" aria-selected="false">XRP</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                    aria-labelledby="home-tab" tabindex="0">
-                                    <div class="head_chart">
-                                        <div class="fs-12 fw-bold cl-black d-flex align-items-center gap-2">
-                                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/bnb-logo.png" class="brand-logo" alt="">
-                                            Bitcoin / Đô la <span class="status up"></span>
-                                        </div>
-                                        <div class="fs-18 fw-bold cl-black">93,480.43 USD</div>
-                                        <div class="fs-14 cl-green"><strong>+2,480.43 - 2.95%</strong> tháng
-                                            trước</div>
-                                    </div>
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/chart.png" class="img-fluid" alt="">
-                                </div>
-                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
-                                    aria-labelledby="profile-tab" tabindex="0">
-                                    <div class="head_chart">
-                                        <div class="fs-12 fw-bold cl-black d-flex align-items-center gap-2">
-                                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/tether-logo.png" class="brand-logo"
-                                                alt=""> Ethereum / Đô la <span class="status down"></span>
-                                        </div>
-                                        <div class="fs-18 fw-bold cl-black">93,480.43 USD</div>
-                                        <div class="fs-14 cl-red"><strong>-1,480.43 - 2.95%</strong> tháng
-                                            trước</div>
-                                    </div>
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/chart.png" class="img-fluid" alt="">
-                                </div>
-                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
-                                    aria-labelledby="contact-tab" tabindex="0">
-                                    <div class="head_chart">
-                                        <div class="fs-12 fw-bold cl-black d-flex align-items-center gap-2">
-                                            <img src="<?php echo get_template_directory_uri() ?>/assets/images/bnb-logo.png" class="brand-logo" alt="">
-                                            Bitcoin / Đô la <span class="status up"></span>
-                                        </div>
-                                        <div class="fs-18 fw-bold cl-black">93,480.43 USD</div>
-                                        <div class="fs-14 cl-green"><strong>+2,480.43 - 2.95%</strong> tháng
-                                            trước</div>
-                                    </div>
-                                    <img src="<?php echo get_template_directory_uri() ?>/assets/images/chart.png" class="img-fluid" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fs-16 text-center mt-3">
-                            <a href="">BTC</a> bởi Trading View
-                        </div>
+                        <?php get_template_part( 'template-parts/content-sidebar'); ?>
                     </div>
                 </div>
             </div>

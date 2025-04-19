@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
 </head>
 <?php $header = get_field('header_group', 'option'); ?>
+<?php $footer = get_field('footer_group', 'option'); ?>
 <body>
     <div id="menu_mobile">
         <a href="" class="hamburger_btn d-lg-none">
@@ -147,18 +148,16 @@
             </div>
             <div class="group_bottom">
                 <ul class="social">
-                    <li><a href=""><img src="<?php echo get_template_directory_uri() ?>/assets/images/facebook.png" class="img-fluid" alt=""></a></li>
-                    <li><a href=""><img src="<?php echo get_template_directory_uri() ?>/assets/images/telegram.png" class="img-fluid" alt=""></a></li>
-                    <li><a href=""><img src="<?php echo get_template_directory_uri() ?>/assets/images/x.png" class="img-fluid" alt=""></a></li>
+                    <?php foreach ($footer['list_social'] as $key => $list_social): ?>
+                        <li><a href="<?php echo $list_social['link'] ?>"><img src="<?php echo $list_social['icon'] ?>" class="img-fluid" alt=""></a></li>
+                    <?php endforeach ?>
                 </ul>
             </div>
         </header>
         <div class="primary_content">
-            <div id="ads_head">
+            <div id="ads_head"> 
                 <div class="ads_box">
-                    <a href="">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/ads-980x120.jpg" alt="">
-                    </a>
+                    <?php echo get_field('ads', 'option'); ?>
                 </div>
             </div>
             <div class="head_mobile d-block d-md-none">
